@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:28:00 by luide-so          #+#    #+#             */
-/*   Updated: 2023/05/10 22:47:14 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:09:48 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,40 @@ char	*get_next_line(int fd)
 {
 	char	*line;
 	int		i;
-	int		fd;
+	int		j;
+	int		fd[3];
 
-	fd = open("text1.txt", O_RDONLY);
-	i = 1;
-	printf("Fd=%d\n\n", fd);
-	while (i)
+	fd[0] = open("text0.txt", O_RDONLY);
+	fd[1] = open("text1.txt", O_RDONLY);
+	fd[2] = open("text2.txt", O_RDONLY);
+	j = 3;
+		while (--j >= 0)
 	{
-		line = get_next_line(fd);
-		if (line)
-		{
-			printf("-%s", line);
-			i = line[0];
-			free(line);
-		}
-		else
-			i = 0;
+		printf("Fd=%d\n\n", fd[j]);
 	}
-	close(fd);
+	j = 3;
+	while (--j >= 0)
+	{
+		printf("\nFd=%d\n", fd[j]);
+		i = 1;
+		while (i)
+			{
+				line = get_next_line(fd[j]);
+				if (line)
+				{
+					printf("-%s", line);
+					i = line[0];
+					free(line);
+				}
+				else
+					i = 0;
+			}
+		printf("\n");
+	}
+	j = 3;
+	while (--j >= 0)
+	{
+		close(fd[j]);
+	}
 	return (0);
 } */
